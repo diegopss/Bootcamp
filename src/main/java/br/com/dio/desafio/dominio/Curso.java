@@ -3,6 +3,7 @@ package br.com.dio.desafio.dominio;
 public class Curso extends Conteudo{
 
     private int cargaHoraria;
+    private  Avaliacao avaliacao;
 
     @Override
     public double calcularXp() {
@@ -20,6 +21,21 @@ public class Curso extends Conteudo{
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
+
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+    public void realizarAvaliacao(int nota){
+        this.getAvaliacao().setNota(nota);
+    }
+   public boolean cursoConcluido(){
+        if(this.avaliacao.aprovado()) return true;
+        return false;
+   }
 
     @Override
     public String toString() {

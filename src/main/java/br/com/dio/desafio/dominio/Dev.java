@@ -13,14 +13,27 @@ public class Dev {
     }
 
     public void progredir() {
+
         Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
         if(conteudo.isPresent()) {
-            this.conteudosConcluidos.add(conteudo.get());
-            this.conteudosInscritos.remove(conteudo.get());
+            if (conteudo.get()instanceof Curso){
+                Curso curso = (Curso) conteudo.get();
+                    if (curso.cursoConcluido()){
+                        this.conteudosConcluidos.add(conteudo.get());
+                        this.conteudosInscritos.remove(conteudo.get());
+                    } else System.err.println("Sua nota não é suficiente para avançar!");
+            } else {
+                this.conteudosConcluidos.add(conteudo.get());
+                this.conteudosInscritos.remove(conteudo.get());
+            }
         } else {
             System.err.println("Você não está matriculado em nenhum conteúdo!");
         }
+
+
+
     }
+
 
     public double calcularTotalXp() {
         Iterator<Conteudo> iterator = this.conteudosConcluidos.iterator();
